@@ -22,4 +22,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Run a one-line script
-        run: terraform validate -var region=${{ matrix.version }}
+        run: |
+          terraform init
+          terraform plan -var region=${{ matrix.version }}
