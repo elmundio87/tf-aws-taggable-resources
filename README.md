@@ -12,7 +12,7 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| <a name="provider_http"></a> [http](#provider\_http) | n/a |
+| <a name="provider_http"></a> [http](#provider\_http) | 3.2.1 |
 
 ## Modules
 
@@ -28,7 +28,8 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_region"></a> [region](#input\_region) | AWS region to reference. Cloudformation specs may differ between regions. | `string` | n/a | yes |
+| <a name="input_region"></a> [region](#input\_region) | AWS region to reference. CloudFormation specs may differ between regions. | `string` | n/a | yes |
+| <a name="input_services"></a> [services](#input\_services) | List of AWS services to filter results. eg: ['EC2','DynamoDB'] will only return resources that are grouped into those services. | `list(string)` | `[]` | no |
 
 ## Outputs
 

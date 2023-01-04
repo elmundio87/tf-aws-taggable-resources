@@ -24,6 +24,12 @@ locals {
     for key, value in { for key, value in local.resourceTypes : key => value["Properties"] if contains(keys(value), "Properties") } :
       key if length([for property in keys(value) : key if endswith(property, "Tags")]) > 0
   ]
+  filteredResourceTypesThatSupportTagsList = flatten([
+    for service in var.services : [
+      for resourceType in local.resourceTypesThatSupportTagsList :
+        resourceType if contains(var.services, split("::",resourceType)[1])
+    ]
+  ])
 }
 
 data "http" "cloudformation_resource_specification" {
