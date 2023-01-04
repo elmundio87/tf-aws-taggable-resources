@@ -43,4 +43,4 @@ jobs:
       - name: Run a Terraform Plan
         run: |
           terraform init
-          terraform plan -var region=${{ matrix.region }}
+          terraform plan -var region=${{ matrix.region }} -var services=${{ matrix.services}}
