@@ -18,29 +18,34 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        region:
+        fixtures:
           [
-            ap-southeast-1,
-            ap-southeast-2,
-            ap-northeast-1,
-            ca-central-1,
-            cn-north-1,
-            cn-northwest-1,
-            eu-central-1,
-            eu-west-1,
-            eu-west-2,
-            eu-west-3,
-            eu-north-1,
-            eu-south-1,
-            me-south-1,
-            sa-east-1,
-            us-gov-east-1,
-            us-gov-west-1,
+            "services/default",
+            "services/1-item",
+            "region/ap-southeast-1",
+            "region/ap-southeast-2",
+            "region/ap-northeast-1",
+            "region/ca-central-1",
+            "region/cn-north-1",
+            "region/cn-northwest-1",
+            "region/eu-central-1",
+            "region/eu-west-1",
+            "region/eu-west-2",
+            "region/eu-west-3",
+            "region/eu-north-1",
+            "region/eu-south-1",
+            "region/me-south-1",
+            "region/sa-east-1",
+            "region/us-east-1",
+            "region/us-east-2",
+            "region/us-west-1",
+            "region/us-west-2",
+            "region/us-gov-east-1",
+            "region/us-gov-west-1",
           ]
-        services: ["[]", "['EC2']"]
     steps:
       - uses: actions/checkout@v3
-      - name: Run a Terraform Plan
+      - name: Run a Terraform Plan for all regions
         run: |
           terraform init
-          terraform plan -var region=${{ matrix.region }} -var services=${{ matrix.services }}
+          terraform plan -var-file ./fixtures/${{ matrix.fixtures }}.tfvars
