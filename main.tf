@@ -20,15 +20,9 @@ locals {
   }
 
   resourceTypes = jsondecode(data.http.cloudformation_resource_specification.response_body)["ResourceTypes"]
-  resourceTypesThatContainProperties = { for key, value in local.resourceTypes : key => value["Properties"] if
-    contains(keys(value), "Properties")
-  }
-  resourceTypesThatSupportTagsMap = { for key, value in local.resourceTypesThatContainProperties : key => [
-    for property in keys(value) : key if endswith(property, "Tags")
-    ]
-  }
   resourceTypesThatSupportTagsList = [
-    for key, value in local.resourceTypesThatSupportTagsMap : key if length(value) > 0
+    for key, value in { for key, value in local.resourceTypes : key => value["Properties"] if contains(keys(value), "Properties") } :
+      key if length([for property in keys(value) : key if endswith(property, "Tags")]) > 0
   ]
 }
 
