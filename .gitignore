@@ -20,6 +20,8 @@ crash.*.log
 *.tfvars
 *.tfvars.json
 
+!fixtures/*/*.tfvars
+
 # Ignore override files as they are usually used to override resources locally and so
 # are not checked in
 override.tf
@@ -36,5 +38,8 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+# Ignore lock file
+.terraform.lock.hcl
 
 # End of https://www.toptal.com/developers/gitignore/api/terraform
